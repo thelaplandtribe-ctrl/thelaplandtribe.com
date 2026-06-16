@@ -22,7 +22,7 @@ export const articles: Article[] = [
     "date": "2026-06-10T13:18:56Z",
     "dateLabel": "10 JUIN 2026",
     "category": "EXPATRIATION",
-    "image": null,
+    "image": "/images/blog-demenager-nordiques.png",
     "excerpt": "Déménager en Finlande depuis la France : notre expérience (et le guide complet pour ne rien oublier) Auteure : Sarah | The Lapland Tribe Temps de lecture : ~15 min Il y a trois ans, on a tout quitté. La France, nos repères, notre confort — pour s'installer à Rovaniemi, en Laponie finlandaise. Ce projet de vie un peu fou, on en...",
     "author": "Sarah Moutin",
     "featured": true
