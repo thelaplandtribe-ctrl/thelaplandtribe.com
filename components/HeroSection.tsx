@@ -1,4 +1,6 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
 
 type Cta = { label: string; href?: string };
 
@@ -8,9 +10,68 @@ type HeroSectionProps = {
   description?: string;
   primaryCta?: Cta;
   secondaryCta?: Cta;
-  imageSrc?: string;
   imageAlt?: string;
 };
+
+type Season = "ete" | "automne" | "hiver";
+
+const NIGHT_IMAGE = "/images/hero-cabane.jpg";
+
+const SEASON_IMAGES: Record<Season, { lever: string; coucher: string }> = {
+  hiver: {
+    lever: "/images/hero-hiver-lever.png",
+    coucher: "/images/hero-hiver-coucher.png",
+  },
+  automne: {
+    lever: "/images/hero-automne-lever.png",
+    coucher: "/images/hero-automne-coucher.png",
+  },
+  ete: {
+    lever: "/images/hero-ete-lever.png",
+    coucher: "/images/hero-ete-lever.png",
+  },
+};
+
+function getHelsinkiSeason(now: Date): Season {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Europe/Helsinki",
+    month: "numeric",
+    day: "numeric",
+  }).formatToParts(now);
+  const m = Number(parts.find((p) => p.type === "month")?.value);
+  const d = Number(parts.find((p) => p.type === "day")?.value);
+  if ((m === 5 && d >= 1) || m === 6 || m === 7 || (m === 8 && d <= 15)) return "ete";
+  if ((m === 8 && d >= 16) || m === 9 || m === 10 || (m === 11 && d <= 14)) return "automne";
+  return "hiver";
+}
+
+function pickHeroImage(
+  season: Season,
+  now: Date,
+  sunrise: Date,
+  sunset: Date,
+): string {
+  if (now < sunrise || now > sunset) return NIGHT_IMAGE;
+  const HOUR_MS = 3_600_000;
+  if (now > new Date(sunset.getTime() - HOUR_MS)) return SEASON_IMAGES[season].coucher;
+  return SEASON_IMAGES[season].lever;
+}
+
+async function getHeroImage(): Promise<string> {
+  const now = new Date();
+  const season = getHelsinkiSeason(now);
+  try {
+    const r = await fetch(
+      "https://api.sunrise-sunset.org/json?lat=66.5039&lng=25.7294&formatted=0",
+    );
+    const data = await r.json();
+    const sunrise = new Date(data.results.sunrise);
+    const sunset = new Date(data.results.sunset);
+    return pickHeroImage(season, now, sunrise, sunset);
+  } catch {
+    return SEASON_IMAGES[season].lever;
+  }
+}
 
 export default function HeroSection({
   eyebrow = "Bienvenue dans le Grand Nord",
@@ -26,19 +87,49 @@ export default function HeroSection({
   description = "Récits de vie, guides arctiques, paysages nordiques, affiches murales et expériences pour préparer votre propre aventure.",
   primaryCta = { label: "LIRE LE BLOG", href: "/blogs/infos" },
   secondaryCta = { label: "DÉCOUVRIR LA BOUTIQUE", href: "/collections/affiches-murales" },
-  imageSrc = "/images/hero-cabane.jpg",
-  imageAlt = "Cabane en Laponie sous les aurores boréales",
+  imageAlt = "Paysage de Laponie",
 }: HeroSectionProps) {
+  const [layerA, setLayerA] = useState<string>(NIGHT_IMAGE);
+  const [layerB, setLayerB] = useState<string | null>(null);
+  const [showB, setShowB] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    getHeroImage().then((target) => {
+      if (cancelled) return;
+      const current = showB ? layerB : layerA;
+      if (target === current) return;
+      if (showB) {
+        setLayerA(target);
+        setShowB(false);
+      } else {
+        setLayerB(target);
+        setShowB(true);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <header className="relative h-[96vh] min-h-[600px] overflow-hidden">
-      <Image
-        src={imageSrc}
+      <img
+        src={layerA}
         alt={imageAlt}
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-[62%_center]"
+        className={`absolute inset-0 w-full h-full object-cover object-[62%_center] transition-opacity duration-[2000ms] ease-in-out ${
+          showB ? "opacity-0" : "opacity-100"
+        }`}
       />
+      {layerB && (
+        <img
+          src={layerB}
+          alt={imageAlt}
+          className={`absolute inset-0 w-full h-full object-cover object-[62%_center] transition-opacity duration-[2000ms] ease-in-out ${
+            showB ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      )}
       <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(8,16,30,0.72)_0%,rgba(8,16,30,0.42)_38%,rgba(8,16,30,0.05)_62%,transparent_100%)]" />
 
       <div className="hero-rise absolute left-0 top-1/2 z-10 max-w-[640px] px-6 md:px-12">
