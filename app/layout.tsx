@@ -62,6 +62,12 @@ export default function RootLayout({
       lang="fr"
       className={`${playfair.variable} ${mulish.variable} ${petitFormal.variable}`}
     >
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.11.0/dist/tabler-icons.min.css"
+        />
+      </head>
       <body className="font-sans min-h-screen flex flex-col bg-cream text-ink">
         <Nav />
         <main className="flex-1">{children}</main>

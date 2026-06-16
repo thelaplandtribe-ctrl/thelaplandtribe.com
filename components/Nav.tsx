@@ -1,38 +1,81 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const links = [
-  { href: "/journal", label: "Journal" },
-  { href: "/boutique", label: "Boutique" },
-  { href: "/experiences", label: "Expériences" },
-  { href: "/a-propos", label: "À propos" },
-  { href: "/contact", label: "Contact" },
+  { href: "/journal", label: "BLOG" },
+  { href: "/boutique", label: "AFFICHES MURALES" },
+  { href: "/boutique", label: "PRINTS & MERCH" },
+  { href: "/experiences", label: "EXPÉRIENCES" },
+  { href: "/a-propos", label: "À PROPOS" },
 ];
 
 export default function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="border-b border-ink/10 bg-cream">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <Link
-          href="/"
-          className="font-display text-xl text-forest tracking-wide"
+    <nav
+      className={`fixed inset-x-0 top-0 z-50 flex items-center justify-between transition-all duration-300 ${
+        scrolled
+          ? "bg-white/90 backdrop-blur-md shadow-[0_1px_0_rgba(27,36,48,0.10)] px-12 py-3.5"
+          : "bg-transparent px-12 py-5"
+      }`}
+    >
+      <Link href="/" aria-label="The Lapland Tribe" className="flex items-center">
+        <span
+          className={`font-display text-xl tracking-wide transition-colors duration-300 ${
+            scrolled ? "text-ink" : "text-white"
+          }`}
         >
           The Lapland Tribe
-        </Link>
-        <nav>
-          <ul className="flex items-center gap-6 text-sm">
-            {links.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-ink/80 hover:text-forest transition-colors"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        </span>
+      </Link>
+
+      <ul
+        className={`hidden md:flex gap-9 text-[13px] font-semibold tracking-[0.08em] transition-colors duration-300 ${
+          scrolled ? "text-ink" : "text-white/90"
+        }`}
+      >
+        {links.map((link, i) => (
+          <li key={`${link.href}-${i}`}>
+            <Link href={link.href} className="hover:opacity-65 transition-opacity">
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      <div
+        className={`hidden md:flex items-center gap-[18px] text-[19px] transition-colors duration-300 ${
+          scrolled ? "text-ink" : "text-white"
+        }`}
+      >
+        <i className="ti ti-search" aria-hidden="true" />
+        <span className="relative">
+          <i className="ti ti-shopping-bag" aria-hidden="true" />
+          <span className="absolute -top-1.5 -right-2 bg-forest text-white text-[9px] font-bold w-[15px] h-[15px] rounded-full flex items-center justify-center">
+            0
+          </span>
+        </span>
       </div>
-    </header>
+
+      <button
+        type="button"
+        aria-label="Menu"
+        className={`md:hidden text-2xl transition-colors duration-300 ${
+          scrolled ? "text-ink" : "text-white"
+        }`}
+      >
+        <i className="ti ti-menu-2" aria-hidden="true" />
+      </button>
+    </nav>
   );
 }
