@@ -29,13 +29,11 @@ export default function Nav() {
       }`}
     >
       <Link href="/" aria-label="The Lapland Tribe" className="flex items-center">
-        <span
-          className={`font-display text-xl tracking-wide transition-colors duration-300 ${
-            scrolled ? "text-ink" : "text-white"
-          }`}
-        >
-          The Lapland Tribe
-        </span>
+        <img
+          src={scrolled ? "/images/logo-dark.png" : "/images/logo-white.png"}
+          alt="The Lapland Tribe"
+          className="h-12 w-auto block transition-opacity duration-300"
+        />
       </Link>
 
       <ul

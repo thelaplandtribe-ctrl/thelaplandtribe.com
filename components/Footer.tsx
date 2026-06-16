@@ -37,7 +37,11 @@ export default function Footer() {
       <div className="mx-auto max-w-[1200px] px-6 md:px-12 pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
           <div className="lg:col-span-4">
-            <p className="font-display text-2xl mb-1">The Lapland Tribe</p>
+            <img
+              src="/images/logo-white.png"
+              alt="The Lapland Tribe"
+              className="h-12 w-auto block mb-2"
+            />
             <p className="font-script text-gold text-lg mb-5">· du Grand Nord</p>
             <address className="not-italic text-sm leading-7 font-light text-cream/70">
               David Törnqvists Väg 7
