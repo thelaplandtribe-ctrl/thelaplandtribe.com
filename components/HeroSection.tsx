@@ -61,9 +61,7 @@ async function getHeroImage(): Promise<string> {
   const now = new Date();
   const season = getHelsinkiSeason(now);
   try {
-    const r = await fetch(
-      "https://api.sunrise-sunset.org/json?lat=66.5039&lng=25.7294&formatted=0",
-    );
+    const r = await fetch("/api/sunrise");
     const data = await r.json();
     const sunrise = new Date(data.results.sunrise);
     const sunset = new Date(data.results.sunset);
