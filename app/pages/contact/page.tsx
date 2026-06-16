@@ -25,12 +25,42 @@ const SUBJECTS = [
   "Presse",
 ];
 
-export default function ContactPage() {
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
+type Status = "idle" | "sending" | "sent" | "error";
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+export default function ContactPage() {
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("sent");
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const payload = {
+      name: String(data.get("name") || ""),
+      email: String(data.get("email") || ""),
+      subject: String(data.get("subject") || ""),
+      message: String(data.get("message") || ""),
+      botcheck: String(data.get("botcheck") || ""),
+    };
+
+    setStatus("sending");
+    setErrorMessage("");
+    try {
+      const r = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!r.ok) {
+        const body = await r.json().catch(() => ({}));
+        throw new Error(body?.error || `Erreur ${r.status}`);
+      }
+      setStatus("sent");
+      form.reset();
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(err instanceof Error ? err.message : "Erreur inconnue");
+    }
   }
 
   return (
@@ -72,6 +102,14 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <form onSubmit={onSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <input
+                    type="text"
+                    name="botcheck"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="hidden"
+                  />
                   <Field label="Nom" htmlFor="contact-name">
                     <input
                       id="contact-name"
@@ -132,12 +170,21 @@ export default function ContactPage() {
                     </p>
                     <button
                       type="submit"
-                      className="bg-forest hover:bg-[#33503F] text-white text-[13px] font-semibold tracking-[0.1em] px-7 py-4 transition-colors inline-flex items-center gap-2"
+                      disabled={status === "sending"}
+                      className="bg-forest hover:bg-[#33503F] text-white text-[13px] font-semibold tracking-[0.1em] px-7 py-4 transition-colors inline-flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      ENVOYER
-                      <i className="ti ti-send" aria-hidden="true" />
+                      {status === "sending" ? "ENVOI…" : "ENVOYER"}
+                      <i
+                        className={`ti ${status === "sending" ? "ti-loader-2 animate-spin" : "ti-send"}`}
+                        aria-hidden="true"
+                      />
                     </button>
                   </div>
+                  {status === "error" && (
+                    <div className="md:col-span-2 border border-red-500/30 bg-red-500/5 p-4 text-sm text-red-700">
+                      {errorMessage || "Impossible d'envoyer le message. Réessayez ou écrivez-nous à contact@thelaplandtribe.com."}
+                    </div>
+                  )}
                 </form>
               )}
             </div>
