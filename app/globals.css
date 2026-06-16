@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-cream: #f7f4ef;
+  --color-ink: #1b2430;
+  --color-forest: #3c5a4b;
+  --color-night: #0e1b2a;
+  --color-gold: #c9a86a;
+}
+
+html,
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+}
