@@ -53,18 +53,18 @@ export default function FeatureCards({ cards = defaultCards }: FeatureCardsProps
               key={card.title}
               className="bg-white rounded-[4px] overflow-hidden shadow-[0_18px_50px_rgba(27,36,48,0.07)] hover:shadow-[0_28px_64px_rgba(27,36,48,0.12)] hover:-translate-y-1.5 transition-all duration-[400ms]"
             >
-              <div className="h-[220px] relative overflow-hidden">
+              <div className="h-[220px] relative overflow-visible">
                 <img
                   src={card.image}
                   alt={card.imageAlt}
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute left-6 -bottom-[26px] w-[54px] h-[54px] rounded-full bg-white flex items-center justify-center text-[23px] text-forest shadow-[0_8px_20px_rgba(27,36,48,0.14)] z-10">
+                <div className="absolute left-1/2 -translate-x-1/2 -bottom-[28px] w-[56px] h-[56px] rounded-full bg-white flex items-center justify-center text-[24px] text-forest shadow-[0_8px_20px_rgba(27,36,48,0.14)] z-10">
                   <i className={`ti ${card.icon}`} aria-hidden="true" />
                 </div>
               </div>
-              <div className="pt-[42px] px-[26px] pb-[30px]">
+              <div className="pt-[48px] px-[26px] pb-[30px]">
                 <h3 className="font-display text-[23px] font-semibold mb-3">
                   {card.title}
                 </h3>

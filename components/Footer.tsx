@@ -40,9 +40,8 @@ export default function Footer() {
             <img
               src="/images/logo-white.png"
               alt="The Lapland Tribe"
-              className="h-12 w-auto block mb-2"
+              className="h-12 w-auto block mb-6"
             />
-            <p className="font-script text-gold text-lg mb-5">· du Grand Nord</p>
             <address className="not-italic text-sm leading-7 font-light text-cream/70">
               David Törnqvists Väg 7
               <br />
@@ -53,10 +52,10 @@ export default function Footer() {
             <p className="mt-5 text-sm font-light text-cream/70">
               Email:{" "}
               <a
-                href="mailto:thelaplandtribe@gmail.com"
+                href="mailto:contact@thelaplandtribe.com"
                 className="text-cream hover:text-gold transition-colors"
               >
-                thelaplandtribe@gmail.com
+                contact@thelaplandtribe.com
               </a>
             </p>
           </div>
