@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
-import Stub from "@/components/Stub";
+import LegalPage from "@/components/LegalPage";
 
-export const metadata: Metadata = { title: "Politique de confidentialité" };
+export const metadata: Metadata = {
+  title: "Politique de confidentialité",
+  description:
+    "Comment The Lapland Tribe collecte, utilise et protège vos données personnelles.",
+};
 
 export default function Page() {
-  return <Stub title="Politique de confidentialité" />;
+  return (
+    <LegalPage
+      slug="politique-de-confidentialite"
+      title="Politique de confidentialité"
+      eyebrow="Vos données"
+    />
+  );
 }

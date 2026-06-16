@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
-import Stub from "@/components/Stub";
+import LegalPage from "@/components/LegalPage";
 
-export const metadata: Metadata = { title: "CGV" };
+export const metadata: Metadata = {
+  title: "CGV",
+  description: "Conditions générales de vente de The Lapland Tribe.",
+};
 
 export default function Page() {
-  return <Stub title="CGV" />;
+  return (
+    <LegalPage
+      slug="cgv"
+      title="Conditions générales de vente"
+      eyebrow="Informations légales"
+    />
+  );
 }
