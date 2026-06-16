@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import FeatureCards from "@/components/FeatureCards";
 import ShowcaseSection from "@/components/ShowcaseSection";
 import PopularArticles from "@/components/PopularArticles";
+import AffichesMurales from "@/components/AffichesMurales";
 import NewsletterBand from "@/components/NewsletterBand";
 
 export default function HomePage() {
@@ -11,6 +12,7 @@ export default function HomePage() {
       <FeatureCards />
       <ShowcaseSection />
       <PopularArticles />
+      <AffichesMurales />
       <NewsletterBand />
     </>
   );
