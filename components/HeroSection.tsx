@@ -50,7 +50,13 @@ function pickHeroImage(
   now: Date,
   sunrise: Date,
   sunset: Date,
+  dayLength: number,
 ): string {
+  // Cercle polaire : day_length = 0 signifie soit le soleil de minuit
+  // (été = jour permanent) soit la nuit polaire (Kaamos).
+  if (dayLength === 0) {
+    return season === "ete" ? SEASON_IMAGES.ete.lever : NIGHT_IMAGE;
+  }
   if (now < sunrise || now > sunset) return NIGHT_IMAGE;
   const HOUR_MS = 3_600_000;
   if (now > new Date(sunset.getTime() - HOUR_MS)) return SEASON_IMAGES[season].coucher;
@@ -65,7 +71,8 @@ async function getHeroImage(): Promise<string> {
     const data = await r.json();
     const sunrise = new Date(data.results.sunrise);
     const sunset = new Date(data.results.sunset);
-    return pickHeroImage(season, now, sunrise, sunset);
+    const dayLength = Number(data.results.day_length) || 0;
+    return pickHeroImage(season, now, sunrise, sunset, dayLength);
   } catch {
     return SEASON_IMAGES[season].lever;
   }
