@@ -3,7 +3,7 @@ import Stub from "@/components/Stub";
 
 export const metadata: Metadata = { title: "Article" };
 
-export default function JournalArticlePage({
+export default function ArticlePage({
   params,
 }: {
   params: { slug: string };

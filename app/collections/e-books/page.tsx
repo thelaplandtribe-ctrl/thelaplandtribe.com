@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ebooks } from "@/data/ebooks";
 
 export const metadata: Metadata = {
-  title: "Boutique — E-books",
+  title: "E-books",
   description:
     "Guides numériques pour s'expatrier et vivre dans le Grand Nord, par The Lapland Tribe.",
 };
@@ -11,7 +12,7 @@ function stripPrefix(title: string) {
   return title.replace(/^E-BOOK\s*:\s*/i, "").trim();
 }
 
-export default function BoutiquePage() {
+export default function CollectionEbooksPage() {
   return (
     <>
       <header className="bg-night text-white pt-36 pb-20">
@@ -33,12 +34,16 @@ export default function BoutiquePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {ebooks.map((ebook) => {
               const displayTitle = stripPrefix(ebook.title);
+              const productHref = `/products/${ebook.slug}`;
               return (
                 <article
                   key={ebook.slug}
                   className="bg-white rounded-[4px] overflow-hidden shadow-[0_18px_50px_rgba(27,36,48,0.07)] hover:shadow-[0_28px_64px_rgba(27,36,48,0.12)] transition-shadow duration-[400ms] flex flex-col"
                 >
-                  <div className="aspect-[4/3] bg-[#EFEAE2] flex items-center justify-center p-10">
+                  <Link
+                    href={productHref}
+                    className="aspect-[4/3] bg-[#EFEAE2] flex items-center justify-center p-10"
+                  >
                     {ebook.image ? (
                       <img
                         src={ebook.image}
@@ -51,14 +56,16 @@ export default function BoutiquePage() {
                         e-book
                       </span>
                     )}
-                  </div>
+                  </Link>
 
                   <div className="p-8 md:p-10 flex flex-col flex-1">
                     <span className="font-script text-forest text-lg block mb-1">
                       E-book
                     </span>
                     <h2 className="font-display text-2xl md:text-[28px] font-semibold leading-[1.2]">
-                      {displayTitle}
+                      <Link href={productHref} className="hover:text-forest transition-colors">
+                        {displayTitle}
+                      </Link>
                     </h2>
                     <p className="mt-4 text-sm text-[#5C6672] font-light flex-1">
                       {ebook.description}
@@ -68,15 +75,13 @@ export default function BoutiquePage() {
                       <span className="font-display text-3xl text-forest">
                         {ebook.price}
                       </span>
-                      <a
-                        href={ebook.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        href={productHref}
                         className="bg-forest hover:bg-[#33503F] text-white text-[13px] font-semibold tracking-[0.1em] px-7 py-4 transition-colors inline-flex items-center gap-2"
                       >
                         VOIR LE GUIDE
                         <i className="ti ti-arrow-right" aria-hidden="true" />
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </article>

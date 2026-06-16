@@ -3,6 +3,6 @@ import Stub from "@/components/Stub";
 
 export const metadata: Metadata = { title: "Mentions légales" };
 
-export default function MentionsLegalesPage() {
+export default function Page() {
   return <Stub title="Mentions légales" />;
 }

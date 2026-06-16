@@ -3,6 +3,6 @@ import Stub from "@/components/Stub";
 
 export const metadata: Metadata = { title: "Contact" };
 
-export default function ContactPage() {
+export default function Page() {
   return <Stub title="Contact" />;
 }

@@ -1,9 +1,11 @@
 import Link from "next/link";
 
 const legalLinks = [
-  { href: "/mentions-legales", label: "Mentions légales" },
-  { href: "/confidentialite", label: "Confidentialité" },
-  { href: "/cgv", label: "CGV" },
+  { href: "/pages/mentions-legales", label: "Mentions légales" },
+  { href: "/pages/politique-de-confidentialite", label: "Confidentialité" },
+  { href: "/pages/cgv", label: "CGV" },
+  { href: "/pages/politique-de-livraison", label: "Livraison" },
+  { href: "/pages/politique-de-retour-et-remboursement", label: "Retours" },
 ];
 
 export default function Footer() {

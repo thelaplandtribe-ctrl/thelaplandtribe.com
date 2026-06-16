@@ -13,7 +13,7 @@ const defaultCards: FeatureCard[] = [
     description:
       "Conseils, récits, vie quotidienne, hiver, famille, logement, budget, démarches…",
     linkLabel: "VOIR LES DERNIERS ARTICLES",
-    linkHref: "/journal",
+    linkHref: "/blogs/infos",
     icon: "ti-book-2",
     illustration: (
       <svg
@@ -48,7 +48,7 @@ const defaultCards: FeatureCard[] = [
     description:
       "Des créations inspirées des paysages nordiques : forêts, aurores, rennes, villages enneigés.",
     linkLabel: "DÉCOUVRIR LES AFFICHES",
-    linkHref: "/boutique",
+    linkHref: "/collections/affiches-murales",
     icon: "ti-photo",
     illustration: (
       <svg
@@ -81,7 +81,7 @@ const defaultCards: FeatureCard[] = [
     description:
       "Safaris aurores, traîneaux à chiens et nuits en dôme de verre, pensés et vécus à Rovaniemi.",
     linkLabel: "DÉCOUVRIR LES SÉJOURS",
-    linkHref: "/experiences",
+    linkHref: "/pages/contact",
     icon: "ti-tent",
     illustration: (
       <svg

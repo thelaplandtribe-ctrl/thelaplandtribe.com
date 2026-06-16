@@ -24,8 +24,8 @@ export default function HeroSection({
     </>
   ),
   description = "Récits de vie, guides arctiques, paysages nordiques, affiches murales et expériences pour préparer votre propre aventure.",
-  primaryCta = { label: "LIRE LE BLOG", href: "/journal" },
-  secondaryCta = { label: "DÉCOUVRIR LA BOUTIQUE", href: "/boutique" },
+  primaryCta = { label: "LIRE LE BLOG", href: "/blogs/infos" },
+  secondaryCta = { label: "DÉCOUVRIR LA BOUTIQUE", href: "/collections/affiches-murales" },
   imageSrc = "/images/hero-cabane.jpg",
   imageAlt = "Cabane en Laponie sous les aurores boréales",
 }: HeroSectionProps) {

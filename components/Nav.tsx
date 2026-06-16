@@ -4,11 +4,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "/journal", label: "BLOG" },
-  { href: "/boutique", label: "AFFICHES MURALES" },
-  { href: "/boutique", label: "PRINTS & MERCH" },
-  { href: "/experiences", label: "EXPÉRIENCES" },
-  { href: "/a-propos", label: "À PROPOS" },
+  { href: "/blogs/infos", label: "BLOG" },
+  { href: "/collections/affiches-murales", label: "AFFICHES MURALES" },
+  { href: "/collections/e-books", label: "E-BOOKS" },
+  { href: "/pages/contact", label: "CONTACT" },
 ];
 
 export default function Nav() {

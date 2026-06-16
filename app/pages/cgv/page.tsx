@@ -3,6 +3,6 @@ import Stub from "@/components/Stub";
 
 export const metadata: Metadata = { title: "CGV" };
 
-export default function CGVPage() {
+export default function Page() {
   return <Stub title="CGV" />;
 }

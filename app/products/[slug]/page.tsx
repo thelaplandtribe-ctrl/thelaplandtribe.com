@@ -3,10 +3,10 @@ import Stub from "@/components/Stub";
 
 export const metadata: Metadata = { title: "Produit" };
 
-export default function ProduitPage({
+export default function ProductPage({
   params,
 }: {
-  params: { produit: string };
+  params: { slug: string };
 }) {
-  return <Stub title={`Produit — ${params.produit}`} />;
+  return <Stub title={`Produit — ${params.slug}`} />;
 }

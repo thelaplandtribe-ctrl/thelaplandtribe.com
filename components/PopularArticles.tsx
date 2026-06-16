@@ -35,7 +35,7 @@ export default function PopularArticles({
   articles = allArticles,
   limit = 5,
   allLabel = "VOIR TOUS LES ARTICLES",
-  allHref = "/journal",
+  allHref = "/blogs/infos",
 }: PopularArticlesProps) {
   const visible = articles.slice(0, limit);
 
@@ -50,9 +50,7 @@ export default function PopularArticles({
           {visible.map((article) => (
             <a
               key={article.slug}
-              href={article.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/blogs/infos/${article.slug}`}
               className="group transition-transform duration-300 hover:-translate-y-1"
             >
               <div className="h-[150px] rounded-[4px] overflow-hidden relative mb-3.5 shadow-[0_10px_26px_rgba(27,36,48,0.10)]">

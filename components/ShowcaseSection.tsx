@@ -21,7 +21,7 @@ const defaultLeft: ShowcaseHalf = {
   description:
     "Des visuels minimalistes et chaleureux pour décorer votre intérieur et garder un peu de Laponie chez vous.",
   ctaLabel: "VOIR LA BOUTIQUE",
-  ctaHref: "/boutique",
+  ctaHref: "/collections/affiches-murales",
   features: [
     { icon: "ti-award", label: "Qualité premium" },
     { icon: "ti-photo", label: "Impression haute déf." },
@@ -66,7 +66,7 @@ const defaultRight: ShowcaseHalf = {
   description:
     "Vivre l'Arctique demande plus qu'un rêve : il faut les bons spots, le bon timing et un peu d'aide locale. Nos séjours et guides vous accompagnent avec une vision concrète et réaliste.",
   ctaLabel: "DÉCOUVRIR LES SÉJOURS",
-  ctaHref: "/experiences",
+  ctaHref: "/pages/contact",
   illustration: (
     <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
       <defs>
