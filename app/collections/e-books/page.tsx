@@ -15,26 +15,26 @@ function stripPrefix(title: string) {
 export default function CollectionEbooksPage() {
   return (
     <>
-      <header className="bg-night text-white pt-36 pb-20">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-12 text-center">
-          <span className="font-script text-gold text-2xl block mb-2">
+      <header className="bg-night text-white pt-24 sm:pt-28 md:pt-36 pb-12 sm:pb-16 md:pb-20">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12 text-center">
+          <span className="font-script text-gold text-xl sm:text-2xl block mb-2">
             Boutique
           </span>
-          <h1 className="font-display text-5xl md:text-6xl font-medium leading-tight">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
             E-books
           </h1>
-          <p className="mt-6 max-w-xl mx-auto text-white/70 font-light">
+          <p className="mt-4 sm:mt-6 max-w-xl mx-auto text-sm sm:text-base text-white/70 font-light">
             Guides pratiques, écrits depuis la Laponie. À télécharger après achat.
           </p>
         </div>
       </header>
 
-      <section className="bg-cream py-20">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <section className="bg-cream py-12 sm:py-16 md:py-20">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
             {ebooks.map((ebook) => {
               const displayTitle = stripPrefix(ebook.title);
-              const productHref = `/products/${ebook.slug}`;
+              const productHref = `/collections/e-books/${ebook.slug}`;
               return (
                 <article
                   key={ebook.slug}
@@ -44,9 +44,9 @@ export default function CollectionEbooksPage() {
                     href={productHref}
                     className="aspect-[4/3] bg-[#EFEAE2] flex items-center justify-center p-10"
                   >
-                    {ebook.image ? (
+                    {ebook.images[0] ? (
                       <img
-                        src={ebook.image}
+                        src={ebook.images[0]}
                         alt={ebook.title}
                         loading="lazy"
                         className="max-h-full max-w-full object-contain drop-shadow-[0_18px_30px_rgba(27,36,48,0.18)]"
@@ -58,11 +58,11 @@ export default function CollectionEbooksPage() {
                     )}
                   </Link>
 
-                  <div className="p-8 md:p-10 flex flex-col flex-1">
+                  <div className="p-6 sm:p-8 md:p-10 flex flex-col flex-1">
                     <span className="font-script text-forest text-lg block mb-1">
                       E-book
                     </span>
-                    <h2 className="font-display text-2xl md:text-[28px] font-semibold leading-[1.2]">
+                    <h2 className="font-display text-xl sm:text-2xl md:text-[28px] font-semibold leading-[1.2]">
                       <Link href={productHref} className="hover:text-forest transition-colors">
                         {displayTitle}
                       </Link>
@@ -89,7 +89,7 @@ export default function CollectionEbooksPage() {
             })}
           </div>
 
-          <p className="mt-16 text-center text-xs tracking-[0.14em] text-[#8A929C] uppercase">
+          <p className="mt-10 sm:mt-16 text-center text-xs tracking-[0.14em] text-[#8A929C] uppercase">
             Téléchargement immédiat · Format PDF · Paiement sécurisé
           </p>
         </div>
