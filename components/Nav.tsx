@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useCart } from "@/context/CartContext";
 
 const links = [
   { href: "/blogs/infos", label: "BLOG" },
@@ -16,6 +17,7 @@ export default function Nav() {
   const isHomepage = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { totalCount, openCart } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -74,13 +76,26 @@ export default function Nav() {
             solid ? "text-ink" : "text-white"
           }`}
         >
-          <i className="ti ti-search" aria-hidden="true" />
-          <span className="relative">
+          <Link
+            href="/search"
+            aria-label="Recherche"
+            className="hover:opacity-70 transition-opacity"
+          >
+            <i className="ti ti-search" aria-hidden="true" />
+          </Link>
+          <button
+            type="button"
+            onClick={openCart}
+            aria-label={`Ouvrir le panier (${totalCount})`}
+            className="relative hover:opacity-70 transition-opacity"
+          >
             <i className="ti ti-shopping-bag" aria-hidden="true" />
-            <span className="absolute -top-1.5 -right-2 bg-forest text-white text-[9px] font-bold w-[15px] h-[15px] rounded-full flex items-center justify-center">
-              0
-            </span>
-          </span>
+            {totalCount > 0 && (
+              <span className="absolute -top-1.5 -right-2 bg-[#C9352B] text-white text-[9px] font-bold min-w-[16px] h-4 px-1 rounded-full flex items-center justify-center">
+                {totalCount}
+              </span>
+            )}
+          </button>
         </div>
 
         <button
@@ -124,13 +139,30 @@ export default function Nav() {
             ))}
           </ul>
           <div className="flex items-center justify-end gap-5 px-6 py-3 border-t border-ink/10 text-[19px] text-ink">
-            <i className="ti ti-search" aria-hidden="true" />
-            <span className="relative">
+            <Link
+              href="/search"
+              onClick={() => setOpen(false)}
+              aria-label="Recherche"
+              className="hover:opacity-70 transition-opacity"
+            >
+              <i className="ti ti-search" aria-hidden="true" />
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                openCart();
+              }}
+              aria-label={`Ouvrir le panier (${totalCount})`}
+              className="relative hover:opacity-70 transition-opacity"
+            >
               <i className="ti ti-shopping-bag" aria-hidden="true" />
-              <span className="absolute -top-1.5 -right-2 bg-forest text-white text-[9px] font-bold w-[15px] h-[15px] rounded-full flex items-center justify-center">
-                0
-              </span>
-            </span>
+              {totalCount > 0 && (
+                <span className="absolute -top-1.5 -right-2 bg-[#C9352B] text-white text-[9px] font-bold min-w-[16px] h-4 px-1 rounded-full flex items-center justify-center">
+                  {totalCount}
+                </span>
+              )}
+            </button>
           </div>
         </div>
       </div>

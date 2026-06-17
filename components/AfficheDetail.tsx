@@ -1,20 +1,50 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Affiche } from "@/data/affiches";
+import { useCart } from "@/context/CartContext";
 
 type AfficheDetailProps = {
   affiche: Affiche;
   related: Affiche[];
 };
 
+function priceToCents(price: string): number {
+  const cleaned = price.replace(/[^\d,.\-]/g, "").replace(",", ".");
+  const value = parseFloat(cleaned);
+  return Number.isFinite(value) ? Math.round(value * 100) : 0;
+}
+
 export default function AfficheDetail({ affiche, related }: AfficheDetailProps) {
   const [activeImage, setActiveImage] = useState(0);
   const [variantIdx, setVariantIdx] = useState(0);
   const [added, setAdded] = useState(false);
+  const { addToCart, openCart } = useCart();
 
   const variant = affiche.variants[variantIdx];
+
+  useEffect(() => {
+    if (!added) return;
+    const t = setTimeout(() => setAdded(false), 2000);
+    return () => clearTimeout(t);
+  }, [added]);
+
+  const handleAdd = () => {
+    addToCart({
+      id: `affiche-${affiche.slug}-${variant.id}`,
+      slug: affiche.slug,
+      titre: affiche.title,
+      prix: variant.price,
+      priceCents: priceToCents(variant.price),
+      image: affiche.images[0] || null,
+      type: "affiche",
+      variantLabel: affiche.multipleVariants ? variant.title : undefined,
+      href: `/products/${affiche.slug}`,
+    });
+    setAdded(true);
+    openCart();
+  };
 
   return (
     <>
@@ -124,14 +154,15 @@ export default function AfficheDetail({ affiche, related }: AfficheDetailProps) 
               <div className="border-t border-ink/10 pt-6">
                 <button
                   type="button"
-                  onClick={() => setAdded(true)}
-                  disabled={added}
-                  className="w-full bg-forest hover:bg-[#33503F] text-white text-[13px] font-semibold tracking-[0.1em] py-4 transition-colors inline-flex items-center justify-center gap-2 disabled:opacity-60"
+                  onClick={handleAdd}
+                  className={`w-full text-white text-[13px] font-semibold tracking-[0.1em] py-4 transition-colors inline-flex items-center justify-center gap-2 ${
+                    added ? "bg-[#33503F]" : "bg-forest hover:bg-[#33503F]"
+                  }`}
                 >
                   {added ? (
                     <>
                       <i className="ti ti-check" aria-hidden="true" />
-                      AJOUTÉ AU PANIER
+                      AJOUTÉ ✓
                     </>
                   ) : (
                     <>
@@ -140,18 +171,6 @@ export default function AfficheDetail({ affiche, related }: AfficheDetailProps) 
                     </>
                   )}
                 </button>
-                {added && (
-                  <div className="mt-4 text-[13px] text-[#5C6672] font-light text-center">
-                    Le panier est en cours d&apos;intégration.{" "}
-                    <Link
-                      href="/pages/contact"
-                      className="text-forest underline"
-                    >
-                      Contactez-nous
-                    </Link>{" "}
-                    pour commander.
-                  </div>
-                )}
 
                 <ul className="mt-8 space-y-2.5 text-sm text-[#5C6672] font-light">
                   <li className="flex items-center gap-2">

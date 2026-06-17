@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ebooks, type Ebook } from "@/data/ebooks";
 import EbookGallery from "./EbookGallery";
+import AddToCartButton from "./AddToCartButton";
 
 type Params = { params: { slug: string } };
 
@@ -30,6 +31,17 @@ export default function EbookDetailPage({ params }: Params) {
   if (!ebook) notFound();
 
   const related = ebooks.find((e) => e.slug !== ebook.slug);
+
+  const cartItem = {
+    id: `ebook-${ebook.slug}`,
+    slug: ebook.slug,
+    titre: ebook.displayTitle,
+    prix: ebook.price,
+    priceCents: ebook.priceCents,
+    image: ebook.images[0] || null,
+    type: "ebook" as const,
+    href: `/collections/e-books/${ebook.slug}`,
+  };
 
   return (
     <>
@@ -79,7 +91,7 @@ export default function EbookDetailPage({ params }: Params) {
               </div>
 
               <div className="border-t border-ink/10 pt-6">
-                <BuyButton url={ebook.url} />
+                <AddToCartButton item={cartItem} />
                 <p className="mt-3 text-[12px] text-[#5C6672] font-light text-center">
                   Paiement sécurisé · Lien de téléchargement envoyé par e-mail après validation
                 </p>
@@ -261,7 +273,9 @@ export default function EbookDetailPage({ params }: Params) {
             Téléchargement immédiat après paiement. Un investissement
             symbolique pour un projet de vie.
           </p>
-          <BuyButton url={ebook.url} variant="gold" />
+          <div className="max-w-[360px] mx-auto">
+            <AddToCartButton item={cartItem} variant="gold" />
+          </div>
         </div>
       </section>
 
@@ -298,30 +312,6 @@ function FormatCell({
       </div>
       <div className="text-sm font-semibold text-ink mt-0.5">{value}</div>
     </div>
-  );
-}
-
-function BuyButton({
-  url,
-  variant = "forest",
-}: {
-  url: string;
-  variant?: "forest" | "gold";
-}) {
-  const cls =
-    variant === "gold"
-      ? "bg-gold hover:bg-[#b89456] text-night"
-      : "bg-forest hover:bg-[#33503F] text-white";
-  return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`w-full ${cls} text-[13px] font-semibold tracking-[0.1em] py-4 transition-colors inline-flex items-center justify-center gap-2`}
-    >
-      <i className="ti ti-shopping-bag" aria-hidden="true" />
-      ACHETER MAINTENANT
-    </a>
   );
 }
 
