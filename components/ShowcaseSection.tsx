@@ -8,6 +8,9 @@ type ShowcaseHalf = {
   ctaHref?: string;
   features?: ShowcaseFeature[];
   illustration: React.ReactNode;
+  bgImage?: string;
+  bgImageAlt?: string;
+  overlayClass?: string;
 };
 
 type ShowcaseSectionProps = {
@@ -28,6 +31,9 @@ const defaultLeft: ShowcaseHalf = {
     { icon: "ti-ruler", label: "Plusieurs formats" },
     { icon: "ti-truck", label: "Envoi soigné" },
   ],
+  bgImage: "/images/bg-affiches.png",
+  bgImageAlt: "Affiches murales inspirées de la Laponie",
+  overlayClass: "bg-night/65",
   illustration: (
     <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -67,6 +73,9 @@ const defaultRight: ShowcaseHalf = {
     "Vivre l'Arctique demande plus qu'un rêve : il faut les bons spots, le bon timing et un peu d'aide locale. Nos séjours et guides vous accompagnent avec une vision concrète et réaliste.",
   ctaLabel: "DÉCOUVRIR LES SÉJOURS",
   ctaHref: "/pages/contact",
+  bgImage: "/images/bg-ebooks.png",
+  bgImageAlt: "E-books d'expatriation The Lapland Tribe",
+  overlayClass: "bg-night/55",
   illustration: (
     <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -120,6 +129,20 @@ function Half({ data, dark }: { data: ShowcaseHalf; dark?: boolean }) {
         dark ? "bg-[#0A1422]" : "bg-night"
       }`}
     >
+      {data.bgImage && (
+        <>
+          <img
+            src={data.bgImage}
+            alt={data.bgImageAlt || ""}
+            aria-hidden={data.bgImageAlt ? undefined : true}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div
+            className={`absolute inset-0 ${data.overlayClass || "bg-night/60"}`}
+            aria-hidden="true"
+          />
+        </>
+      )}
       <div className="relative z-10 max-w-[380px]">
         <span className="font-script text-gold text-xl block mb-2">
           {data.eyebrow}
@@ -150,9 +173,11 @@ function Half({ data, dark }: { data: ShowcaseHalf; dark?: boolean }) {
           {data.ctaLabel}
         </a>
       </div>
-      <div className="hidden md:block absolute -right-[30px] top-1/2 -translate-y-1/2 w-[300px] z-0 opacity-95">
-        {data.illustration}
-      </div>
+      {!data.bgImage && (
+        <div className="hidden md:block absolute -right-[30px] top-1/2 -translate-y-1/2 w-[300px] z-0 opacity-95">
+          {data.illustration}
+        </div>
+      )}
     </div>
   );
 }
