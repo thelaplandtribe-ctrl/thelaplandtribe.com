@@ -10,7 +10,6 @@ type ShowcaseHalf = {
   illustration: React.ReactNode;
   bgImage?: string;
   bgImageAlt?: string;
-  overlayClass?: string;
 };
 
 type ShowcaseSectionProps = {
@@ -33,7 +32,6 @@ const defaultLeft: ShowcaseHalf = {
   ],
   bgImage: "/images/bg-affiches.png",
   bgImageAlt: "Affiches murales inspirées de la Laponie",
-  overlayClass: "bg-night/65",
   illustration: (
     <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -75,7 +73,6 @@ const defaultRight: ShowcaseHalf = {
   ctaHref: "/pages/contact",
   bgImage: "/images/bg-ebooks.png",
   bgImageAlt: "E-books d'expatriation The Lapland Tribe",
-  overlayClass: "bg-night/55",
   illustration: (
     <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -122,35 +119,42 @@ const defaultRight: ShowcaseHalf = {
   ),
 };
 
+const TEXT_SHADOW = "0 2px 8px rgba(0,0,0,0.4)";
+
 function Half({ data, dark }: { data: ShowcaseHalf; dark?: boolean }) {
   return (
     <div
-      className={`relative overflow-hidden min-h-[440px] flex items-center py-[70px] px-8 md:px-14 ${
+      className={`relative overflow-hidden min-h-[600px] flex items-center py-20 px-8 md:px-14 ${
         dark ? "bg-[#0A1422]" : "bg-night"
       }`}
     >
       {data.bgImage && (
-        <>
-          <img
-            src={data.bgImage}
-            alt={data.bgImageAlt || ""}
-            aria-hidden={data.bgImageAlt ? undefined : true}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div
-            className={`absolute inset-0 ${data.overlayClass || "bg-night/60"}`}
-            aria-hidden="true"
-          />
-        </>
+        <img
+          src={data.bgImage}
+          alt={data.bgImageAlt || ""}
+          aria-hidden={data.bgImageAlt ? undefined : true}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
       )}
       <div className="relative z-10 max-w-[380px]">
-        <span className="font-script text-gold text-xl block mb-2">
+        <span
+          className="font-script text-gold text-xl block mb-2"
+          style={{ textShadow: TEXT_SHADOW }}
+        >
           {data.eyebrow}
         </span>
-        <h2 className="font-display text-[32px] leading-[1.12] font-medium mb-[18px] text-white">
+        <h2
+          className="font-display text-[32px] leading-[1.12] font-medium mb-[18px] text-white"
+          style={{ textShadow: TEXT_SHADOW }}
+        >
           {data.title}
         </h2>
-        <p className="text-sm text-white/70 font-light mb-6">{data.description}</p>
+        <p
+          className="text-sm text-white/90 font-light mb-6"
+          style={{ textShadow: TEXT_SHADOW }}
+        >
+          {data.description}
+        </p>
         {data.features && data.features.length > 0 && (
           <div className="flex flex-wrap gap-[22px] mb-[26px]">
             {data.features.map((f) => (
@@ -159,7 +163,10 @@ function Half({ data, dark }: { data: ShowcaseHalf; dark?: boolean }) {
                 className="flex flex-col items-center gap-[7px] w-[72px] text-center"
               >
                 <i className={`ti ${f.icon} text-xl text-gold`} aria-hidden="true" />
-                <span className="text-[9.5px] text-white/60 leading-[1.3] tracking-[0.02em]">
+                <span
+                  className="text-[9.5px] text-white/85 leading-[1.3] tracking-[0.02em]"
+                  style={{ textShadow: TEXT_SHADOW }}
+                >
                   {f.label}
                 </span>
               </div>
