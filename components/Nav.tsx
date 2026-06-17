@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const links = [
@@ -11,6 +12,8 @@ const links = [
 ];
 
 export default function Nav() {
+  const pathname = usePathname();
+  const isHomepage = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -28,13 +31,13 @@ export default function Nav() {
     };
   }, [open]);
 
-  const menuOpaque = scrolled || open;
+  const solid = !isHomepage || scrolled || open;
 
   return (
     <>
       <nav
         className={`fixed inset-x-0 top-0 z-50 flex items-center justify-between transition-all duration-300 ${
-          menuOpaque
+          solid
             ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(27,36,48,0.10)] px-4 sm:px-6 md:px-12 py-3"
             : "bg-transparent px-4 sm:px-6 md:px-12 py-4 sm:py-5"
         }`}
@@ -46,7 +49,7 @@ export default function Nav() {
           onClick={() => setOpen(false)}
         >
           <img
-            src={menuOpaque ? "/images/logo-dark.png" : "/images/logo-white.png"}
+            src={solid ? "/images/logo-dark.png" : "/images/logo-white.png"}
             alt="The Lapland Tribe"
             className="h-10 sm:h-12 w-auto block transition-opacity duration-300"
           />
@@ -54,7 +57,7 @@ export default function Nav() {
 
         <ul
           className={`hidden md:flex gap-9 text-[13px] font-semibold tracking-[0.08em] transition-colors duration-300 ${
-            scrolled ? "text-ink" : "text-white/90"
+            solid ? "text-ink" : "text-white/90"
           }`}
         >
           {links.map((link, i) => (
@@ -68,7 +71,7 @@ export default function Nav() {
 
         <div
           className={`hidden md:flex items-center gap-[18px] text-[19px] transition-colors duration-300 ${
-            scrolled ? "text-ink" : "text-white"
+            solid ? "text-ink" : "text-white"
           }`}
         >
           <i className="ti ti-search" aria-hidden="true" />
@@ -86,7 +89,7 @@ export default function Nav() {
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
           className={`md:hidden text-2xl transition-colors duration-300 ${
-            menuOpaque ? "text-ink" : "text-white"
+            solid ? "text-ink" : "text-white"
           }`}
         >
           <i className={`ti ${open ? "ti-x" : "ti-menu-2"}`} aria-hidden="true" />
