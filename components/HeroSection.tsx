@@ -120,9 +120,14 @@ export default function HeroSection({
   return (
     <header className="relative h-[92vh] min-h-[480px] sm:min-h-[560px] md:min-h-[600px] overflow-hidden">
       <img
+        src="/images/hero-mobile.jpg"
+        alt={imageAlt}
+        className="md:hidden absolute inset-0 w-full h-full object-cover object-center"
+      />
+      <img
         src={layerA}
         alt={imageAlt}
-        className={`absolute inset-0 w-full h-full object-cover object-[62%_center] transition-opacity duration-[2000ms] ease-in-out ${
+        className={`hidden md:block absolute inset-0 w-full h-full object-cover object-[62%_center] transition-opacity duration-[2000ms] ease-in-out ${
           showB ? "opacity-0" : "opacity-100"
         }`}
       />
@@ -130,7 +135,7 @@ export default function HeroSection({
         <img
           src={layerB}
           alt={imageAlt}
-          className={`absolute inset-0 w-full h-full object-cover object-[62%_center] transition-opacity duration-[2000ms] ease-in-out ${
+          className={`hidden md:block absolute inset-0 w-full h-full object-cover object-[62%_center] transition-opacity duration-[2000ms] ease-in-out ${
             showB ? "opacity-100" : "opacity-0"
           }`}
         />
