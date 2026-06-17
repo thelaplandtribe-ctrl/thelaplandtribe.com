@@ -123,84 +123,96 @@ const TEXT_SHADOW = "0 2px 8px rgba(0,0,0,0.4)";
 
 function Half({
   data,
-  dark,
   darkText,
 }: {
   data: ShowcaseHalf;
-  dark?: boolean;
   darkText?: boolean;
 }) {
-  const textShadowStyle = darkText ? undefined : { textShadow: TEXT_SHADOW };
+  const desktopShadow = darkText ? undefined : { textShadow: TEXT_SHADOW };
+  const mobileBg = darkText ? "bg-cream" : "bg-night";
+
   return (
-    <div
-      className={`relative overflow-hidden min-h-[420px] md:min-h-[500px] lg:min-h-[600px] flex items-end md:items-center p-7 md:p-12 lg:px-14 ${
-        dark ? "bg-[#0A1422]" : "bg-night"
-      }`}
-    >
+    <div className="relative flex flex-col md:block md:overflow-hidden md:min-h-[500px] lg:min-h-[600px]">
+      {data.bgImage && (
+        <div className="md:hidden w-full h-[280px] relative overflow-hidden">
+          <img
+            src={data.bgImage}
+            alt={data.bgImageAlt || ""}
+            aria-hidden={data.bgImageAlt ? undefined : true}
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+      )}
       {data.bgImage && (
         <img
           src={data.bgImage}
-          alt={data.bgImageAlt || ""}
-          aria-hidden={data.bgImageAlt ? undefined : true}
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          alt=""
+          aria-hidden="true"
+          className="hidden md:block absolute inset-0 w-full h-full object-cover object-center"
         />
       )}
-      <div className="relative z-10 max-w-[280px] md:max-w-[380px]">
-        <span
-          className="font-script text-gold text-lg md:text-xl block mb-1.5 md:mb-2"
-          style={textShadowStyle}
-        >
-          {data.eyebrow}
-        </span>
-        <h2
-          className={`font-display text-[22px] md:text-[28px] lg:text-[32px] leading-[1.14] font-medium mb-3 md:mb-[18px] ${
-            darkText ? "text-[#1B2430]" : "text-white"
-          }`}
-          style={textShadowStyle}
-        >
-          {data.title}
-        </h2>
-        <p
-          className={`text-[13px] md:text-sm font-light mb-5 md:mb-6 ${
-            darkText ? "text-[#1B2430]/85" : "text-white/90"
-          }`}
-          style={textShadowStyle}
-        >
-          {data.description}
-        </p>
-        {data.features && data.features.length > 0 && (
-          <div className="hidden md:flex flex-wrap gap-[22px] mb-[26px]">
-            {data.features.map((f) => (
-              <div
-                key={f.label}
-                className="flex flex-col items-center gap-[7px] w-[72px] text-center"
-              >
-                <i className={`ti ${f.icon} text-xl text-gold`} aria-hidden="true" />
-                <span
-                  className={`text-[9.5px] leading-[1.3] tracking-[0.02em] ${
-                    darkText ? "text-[#1B2430]/85" : "text-white/85"
-                  }`}
-                  style={textShadowStyle}
+
+      <div
+        className={`relative z-10 p-7 md:p-12 lg:px-14 md:absolute md:inset-0 md:flex md:items-center md:p-0 md:pl-12 lg:pl-14 ${mobileBg} md:bg-transparent`}
+      >
+        <div className="md:max-w-[380px]">
+          <span
+            className="font-script text-gold text-lg md:text-xl block mb-1.5 md:mb-2"
+            style={desktopShadow}
+          >
+            {data.eyebrow}
+          </span>
+          <h2
+            className={`font-display text-[22px] md:text-[28px] lg:text-[32px] leading-[1.14] font-medium mb-3 md:mb-[18px] ${
+              darkText ? "text-[#1B2430]" : "text-white"
+            }`}
+            style={desktopShadow}
+          >
+            {data.title}
+          </h2>
+          <p
+            className={`text-[13px] md:text-sm font-light mb-5 md:mb-6 ${
+              darkText ? "text-[#1B2430]/85" : "text-white/90"
+            }`}
+            style={desktopShadow}
+          >
+            {data.description}
+          </p>
+          {data.features && data.features.length > 0 && (
+            <div className="hidden md:flex flex-wrap gap-[22px] mb-[26px]">
+              {data.features.map((f) => (
+                <div
+                  key={f.label}
+                  className="flex flex-col items-center gap-[7px] w-[72px] text-center"
                 >
-                  {f.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-        <a
-          href={data.ctaHref}
-          className={`inline-block text-[12px] md:text-[13px] font-semibold tracking-[0.1em] px-6 md:px-[30px] py-3 md:py-[15px] transition-colors ${
-            darkText
-              ? "bg-[#1B2430] hover:bg-black text-white"
-              : "bg-white/95 hover:bg-white text-night"
-          }`}
-        >
-          {data.ctaLabel}
-        </a>
+                  <i className={`ti ${f.icon} text-xl text-gold`} aria-hidden="true" />
+                  <span
+                    className={`text-[9.5px] leading-[1.3] tracking-[0.02em] ${
+                      darkText ? "text-[#1B2430]/85" : "text-white/85"
+                    }`}
+                    style={desktopShadow}
+                  >
+                    {f.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+          <a
+            href={data.ctaHref}
+            className={`inline-block text-[12px] md:text-[13px] font-semibold tracking-[0.1em] px-6 md:px-[30px] py-3 md:py-[15px] transition-colors ${
+              darkText
+                ? "bg-[#1B2430] hover:bg-black text-white"
+                : "bg-white/95 hover:bg-white text-night"
+            }`}
+          >
+            {data.ctaLabel}
+          </a>
+        </div>
       </div>
+
       {!data.bgImage && (
-        <div className="absolute right-4 bottom-0 md:right-[-30px] md:top-1/2 md:bottom-auto md:-translate-y-1/2 max-w-[180px] md:max-w-[300px] z-0 opacity-95 pointer-events-none">
+        <div className="hidden md:block absolute -right-[30px] top-1/2 -translate-y-1/2 w-[300px] z-0 opacity-95 pointer-events-none">
           {data.illustration}
         </div>
       )}
@@ -213,9 +225,9 @@ export default function ShowcaseSection({
   right = defaultRight,
 }: ShowcaseSectionProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 text-white" id="shop">
+    <div className="grid grid-cols-1 md:grid-cols-2" id="shop">
       <Half data={left} />
-      <Half data={right} dark darkText />
+      <Half data={right} darkText />
     </div>
   );
 }
