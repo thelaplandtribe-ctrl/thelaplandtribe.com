@@ -121,7 +121,16 @@ const defaultRight: ShowcaseHalf = {
 
 const TEXT_SHADOW = "0 2px 8px rgba(0,0,0,0.4)";
 
-function Half({ data, dark }: { data: ShowcaseHalf; dark?: boolean }) {
+function Half({
+  data,
+  dark,
+  darkText,
+}: {
+  data: ShowcaseHalf;
+  dark?: boolean;
+  darkText?: boolean;
+}) {
+  const textShadowStyle = darkText ? undefined : { textShadow: TEXT_SHADOW };
   return (
     <div
       className={`relative overflow-hidden min-h-[600px] flex items-center py-20 px-8 md:px-14 ${
@@ -139,19 +148,23 @@ function Half({ data, dark }: { data: ShowcaseHalf; dark?: boolean }) {
       <div className="relative z-10 max-w-[380px]">
         <span
           className="font-script text-gold text-xl block mb-2"
-          style={{ textShadow: TEXT_SHADOW }}
+          style={textShadowStyle}
         >
           {data.eyebrow}
         </span>
         <h2
-          className="font-display text-[32px] leading-[1.12] font-medium mb-[18px] text-white"
-          style={{ textShadow: TEXT_SHADOW }}
+          className={`font-display text-[32px] leading-[1.12] font-medium mb-[18px] ${
+            darkText ? "text-[#1B2430]" : "text-white"
+          }`}
+          style={textShadowStyle}
         >
           {data.title}
         </h2>
         <p
-          className="text-sm text-white/90 font-light mb-6"
-          style={{ textShadow: TEXT_SHADOW }}
+          className={`text-sm font-light mb-6 ${
+            darkText ? "text-[#1B2430]/85" : "text-white/90"
+          }`}
+          style={textShadowStyle}
         >
           {data.description}
         </p>
@@ -164,8 +177,10 @@ function Half({ data, dark }: { data: ShowcaseHalf; dark?: boolean }) {
               >
                 <i className={`ti ${f.icon} text-xl text-gold`} aria-hidden="true" />
                 <span
-                  className="text-[9.5px] text-white/85 leading-[1.3] tracking-[0.02em]"
-                  style={{ textShadow: TEXT_SHADOW }}
+                  className={`text-[9.5px] leading-[1.3] tracking-[0.02em] ${
+                    darkText ? "text-[#1B2430]/85" : "text-white/85"
+                  }`}
+                  style={textShadowStyle}
                 >
                   {f.label}
                 </span>
@@ -175,7 +190,11 @@ function Half({ data, dark }: { data: ShowcaseHalf; dark?: boolean }) {
         )}
         <a
           href={data.ctaHref}
-          className="inline-block bg-white/95 hover:bg-white text-night text-[13px] font-semibold tracking-[0.1em] px-[30px] py-[15px] transition-colors"
+          className={`inline-block text-[13px] font-semibold tracking-[0.1em] px-[30px] py-[15px] transition-colors ${
+            darkText
+              ? "bg-[#1B2430] hover:bg-black text-white"
+              : "bg-white/95 hover:bg-white text-night"
+          }`}
         >
           {data.ctaLabel}
         </a>
@@ -196,7 +215,7 @@ export default function ShowcaseSection({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 text-white" id="shop">
       <Half data={left} />
-      <Half data={right} dark />
+      <Half data={right} dark darkText />
     </div>
   );
 }
