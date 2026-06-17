@@ -18,9 +18,9 @@ export default function AfficheDetail({ affiche, related }: AfficheDetailProps) 
 
   return (
     <>
-      <section className="bg-cream pt-32 pb-20">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-          <nav className="mb-8 text-[11px] tracking-[0.12em] font-bold text-[#8A929C]">
+      <section className="bg-cream pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12">
+          <nav className="mb-6 sm:mb-8 text-[11px] tracking-[0.12em] font-bold text-[#8A929C]">
             <Link href="/" className="hover:text-forest transition-colors">
               ACCUEIL
             </Link>
@@ -33,7 +33,7 @@ export default function AfficheDetail({ affiche, related }: AfficheDetailProps) 
             </Link>
           </nav>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16">
             <div>
               <div className="aspect-[3/4] bg-white rounded-[4px] overflow-hidden shadow-[0_18px_50px_rgba(27,36,48,0.07)]">
                 {affiche.images[activeImage] && (
@@ -45,7 +45,7 @@ export default function AfficheDetail({ affiche, related }: AfficheDetailProps) 
                 )}
               </div>
               {affiche.images.length > 1 && (
-                <div className="mt-4 grid grid-cols-5 gap-3">
+                <div className="mt-3 sm:mt-4 grid grid-cols-4 sm:grid-cols-5 gap-2 sm:gap-3">
                   {affiche.images.slice(0, 5).map((src, i) => (
                     <button
                       key={src}
@@ -70,10 +70,10 @@ export default function AfficheDetail({ affiche, related }: AfficheDetailProps) 
               <span className="font-script text-forest text-xl block mb-1">
                 Affiche
               </span>
-              <h1 className="font-display text-3xl md:text-4xl font-semibold leading-[1.15] mb-6">
+              <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold leading-[1.15] mb-4 sm:mb-6">
                 {affiche.title}
               </h1>
-              <p className="font-display text-3xl md:text-4xl text-forest mb-8">
+              <p className="font-display text-2xl sm:text-3xl md:text-4xl text-forest mb-6 sm:mb-8">
                 {variant.price}
               </p>
 
@@ -172,8 +172,8 @@ export default function AfficheDetail({ affiche, related }: AfficheDetailProps) 
           </div>
 
           {affiche.bodyHtml && (
-            <div className="mt-20 max-w-3xl mx-auto">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold mb-6 text-center">
+            <div className="mt-12 sm:mt-16 md:mt-20 max-w-3xl mx-auto">
+              <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-semibold mb-5 sm:mb-6 text-center">
                 À propos de cette affiche
               </h2>
               <div
@@ -186,12 +186,12 @@ export default function AfficheDetail({ affiche, related }: AfficheDetailProps) 
       </section>
 
       {related.length > 0 && (
-        <section className="bg-white py-20 border-t border-ink/5">
-          <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-            <h2 className="font-display text-2xl md:text-3xl font-semibold mb-10 text-center">
+        <section className="bg-white py-12 sm:py-16 md:py-20 border-t border-ink/5">
+          <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12">
+            <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-semibold mb-8 sm:mb-10 text-center">
               Vous aimerez aussi
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {related.map((r) => (
                 <Link
                   key={r.slug}

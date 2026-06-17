@@ -45,15 +45,15 @@ type FeatureCardsProps = { cards?: FeatureCard[] };
 
 export default function FeatureCards({ cards = defaultCards }: FeatureCardsProps) {
   return (
-    <section className="bg-cream py-20" id="blog">
-      <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[30px]">
+    <section className="bg-cream py-12 sm:py-16 md:py-20" id="blog">
+      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 md:gap-[30px]">
           {cards.map((card) => (
             <article
               key={card.title}
               className="bg-white rounded-[4px] overflow-hidden shadow-[0_18px_50px_rgba(27,36,48,0.07)] hover:shadow-[0_28px_64px_rgba(27,36,48,0.12)] hover:-translate-y-1.5 transition-all duration-[400ms]"
             >
-              <div className="h-[220px] relative overflow-visible">
+              <div className="h-[180px] sm:h-[200px] md:h-[220px] relative overflow-visible">
                 <img
                   src={card.image}
                   alt={card.imageAlt}
@@ -64,11 +64,11 @@ export default function FeatureCards({ cards = defaultCards }: FeatureCardsProps
                   <i className={`ti ${card.icon}`} aria-hidden="true" />
                 </div>
               </div>
-              <div className="pt-[48px] px-[26px] pb-[30px]">
-                <h3 className="font-display text-[23px] font-semibold mb-3">
+              <div className="pt-10 sm:pt-[44px] md:pt-[48px] px-5 sm:px-[26px] pb-6 sm:pb-[30px]">
+                <h3 className="font-display text-[19px] sm:text-[21px] md:text-[23px] font-semibold mb-3">
                   {card.title}
                 </h3>
-                <p className="text-sm text-[#5C6672] font-light mb-5 min-h-[64px]">
+                <p className="text-sm text-[#5C6672] font-light mb-5 md:min-h-[64px]">
                   {card.description}
                 </p>
                 <a

@@ -21,21 +21,21 @@ export default function AffichesMurales({
   const items = affiches.slice(0, limit);
 
   return (
-    <section className="bg-cream py-[84px]">
-      <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-        <div className="text-center mb-12">
-          <span className="font-script text-forest text-[22px] block mb-1">
+    <section className="bg-cream py-14 sm:py-20 md:py-[84px]">
+      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12">
+        <div className="text-center mb-8 sm:mb-12">
+          <span className="font-script text-forest text-[18px] sm:text-[22px] block mb-1">
             {eyebrow}
           </span>
-          <h2 className="font-display text-[34px] font-semibold mb-3">
+          <h2 className="font-display text-[24px] sm:text-[28px] md:text-[34px] font-semibold mb-3">
             {title}
           </h2>
-          <p className="text-[#5C6672] font-light max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-[#5C6672] font-light max-w-xl mx-auto">
             {subtitle}
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {items.map((affiche) => {
             const href = `/products/${affiche.slug}`;
             const cover = affiche.images[0];
@@ -75,10 +75,10 @@ export default function AffichesMurales({
           })}
         </div>
 
-        <div className="mt-14 text-center">
+        <div className="mt-10 sm:mt-14 text-center">
           <Link
             href={ctaHref}
-            className="inline-flex items-center gap-2 text-[12px] font-bold tracking-[0.1em] text-ink border border-ink/15 px-[34px] py-[14px] hover:bg-ink hover:text-cream hover:border-ink transition-colors"
+            className="inline-flex items-center gap-2 text-[12px] font-bold tracking-[0.1em] text-ink border border-ink/15 px-[28px] sm:px-[34px] py-3 sm:py-[14px] hover:bg-ink hover:text-cream hover:border-ink transition-colors"
           >
             {ctaLabel.toUpperCase()}
             <i className="ti ti-arrow-right" aria-hidden="true" />

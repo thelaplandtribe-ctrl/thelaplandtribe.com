@@ -91,7 +91,7 @@ export default async function ArticlePage({ params }: Params) {
     const { frontmatter, content } = post;
     return (
       <article>
-        <header className="relative bg-night text-white pt-36 pb-24 overflow-hidden">
+        <header className="relative bg-night text-white pt-24 sm:pt-28 md:pt-36 pb-14 sm:pb-18 md:pb-24 overflow-hidden">
           {frontmatter.image && (
             <>
               <img
@@ -103,19 +103,19 @@ export default async function ArticlePage({ params }: Params) {
               <div className="absolute inset-0 bg-gradient-to-b from-night/70 via-night/60 to-night" />
             </>
           )}
-          <div className="relative z-10 mx-auto max-w-[820px] px-6 md:px-12 text-center">
+          <div className="relative z-10 mx-auto max-w-[820px] px-4 sm:px-6 md:px-12 text-center">
             <div className="text-[11px] tracking-[0.14em] font-bold text-gold mb-4">
               {frontmatter.categorie?.toUpperCase()} · {frontmatter.readTime}
             </div>
-            <h1 className="font-display text-3xl md:text-5xl font-medium leading-[1.12]">
+            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-[1.14]">
               {frontmatter.title}
             </h1>
             <p className="mt-6 text-sm text-white/70">{frontmatter.excerpt}</p>
           </div>
         </header>
 
-        <section className="bg-cream py-16">
-          <div className="mx-auto max-w-[1200px] px-6 md:px-12 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-12">
+        <section className="bg-cream py-10 sm:py-12 md:py-16">
+          <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-10 md:gap-12">
             <div className="article-prose">
               <MDXRemote source={content} />
             </div>
@@ -135,7 +135,7 @@ export default async function ArticlePage({ params }: Params) {
 
   return (
     <article>
-      <header className="relative bg-night text-white pt-36 pb-24 overflow-hidden">
+      <header className="relative bg-night text-white pt-24 sm:pt-28 md:pt-36 pb-14 sm:pb-18 md:pb-24 overflow-hidden">
         {heroImage && (
           <>
             <img
@@ -162,8 +162,8 @@ export default async function ArticlePage({ params }: Params) {
         </div>
       </header>
 
-      <section className="bg-cream py-16">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-12 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-12">
+      <section className="bg-cream py-10 sm:py-12 md:py-16">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-10 md:gap-12">
           {body?.bodyHtml ? (
             <div
               className="article-prose"
@@ -223,8 +223,8 @@ function Sidebar({ related }: { related: SidebarItem[] }) {
 
 function BottomLink() {
   return (
-    <div className="bg-cream pb-16">
-      <div className="mx-auto max-w-[760px] px-6 md:px-8 text-center border-t border-ink/10 pt-10">
+    <div className="bg-cream pb-12 sm:pb-16">
+      <div className="mx-auto max-w-[760px] px-4 sm:px-6 md:px-8 text-center border-t border-ink/10 pt-8 sm:pt-10">
         <Link
           href="/blogs/infos"
           className="inline-flex items-center gap-2 text-[12px] font-bold tracking-[0.1em] text-forest hover:gap-3 transition-all"

@@ -34,9 +34,9 @@ const paymentMethods = ["Visa", "Mastercard", "Maestro", "American Express", "Sh
 export default function Footer() {
   return (
     <footer className="bg-night text-cream">
-      <div className="mx-auto max-w-[1200px] px-6 md:px-12 pt-16 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
-          <div className="lg:col-span-4">
+      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12 pt-12 sm:pt-16 pb-10 sm:pb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12">
+          <div className="sm:col-span-2 lg:col-span-4">
             <img
               src="/images/logo-white.png"
               alt="The Lapland Tribe"
@@ -121,7 +121,7 @@ export default function Footer() {
             <p className="text-xs font-light text-cream/70 mb-4">
               Recevez toutes les nouvelles en avant première !
             </p>
-            <form action="#" className="flex">
+            <form action="#" className="flex flex-col sm:flex-row">
               <input
                 type="email"
                 name="email"
@@ -131,7 +131,7 @@ export default function Footer() {
               />
               <button
                 type="submit"
-                className="bg-gold hover:bg-gold/90 text-night text-xs font-bold tracking-[0.08em] px-5 transition-colors"
+                className="bg-gold hover:bg-gold/90 text-night text-xs font-bold tracking-[0.08em] px-5 py-2.5 sm:py-0 transition-colors"
               >
                 ENTRER
               </button>
@@ -141,11 +141,11 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-cream/10 bg-[#0A1422]">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-12 py-5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12 py-4 sm:py-5 flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4 text-xs text-center md:text-left">
           <p className="text-cream/60 font-light">
             © {new Date().getFullYear()}, The Lapland Tribe, Tous droits réservés
           </p>
-          <ul className="flex flex-wrap items-center gap-2 text-cream/60">
+          <ul className="flex flex-wrap items-center justify-center md:justify-end gap-2 text-cream/60">
             <li className="uppercase tracking-[0.14em] font-bold text-[10px] mr-2">
               Payment methods
             </li>

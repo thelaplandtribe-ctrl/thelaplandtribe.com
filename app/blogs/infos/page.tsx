@@ -77,27 +77,27 @@ export default async function BlogIndexPage() {
 
   return (
     <>
-      <header className="bg-night text-white pt-36 pb-20">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-12 text-center">
-          <span className="font-script text-gold text-2xl block mb-2">
+      <header className="bg-night text-white pt-24 sm:pt-28 md:pt-36 pb-12 sm:pb-16 md:pb-20">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12 text-center">
+          <span className="font-script text-gold text-xl sm:text-2xl block mb-2">
             Le journal
           </span>
-          <h1 className="font-display text-5xl md:text-6xl font-medium leading-tight">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
             Récits du Grand Nord
           </h1>
-          <p className="mt-6 max-w-xl mx-auto text-white/70 font-light">
+          <p className="mt-4 sm:mt-6 max-w-xl mx-auto text-sm sm:text-base text-white/70 font-light">
             Conseils, récits de vie, guides arctiques et coulisses, écrits depuis
             la Laponie.
           </p>
         </div>
       </header>
 
-      <section className="bg-cream py-20">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-          <p className="text-center text-xs tracking-[0.14em] text-[#8A929C] uppercase mb-10">
+      <section className="bg-cream py-12 sm:py-16 md:py-20">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12">
+          <p className="text-center text-xs tracking-[0.14em] text-[#8A929C] uppercase mb-8 sm:mb-10">
             {cards.length} articles · Mis à jour régulièrement
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {cards.map((card) => {
               const href = `/blogs/infos/${card.slug}`;
               return (
@@ -122,7 +122,7 @@ export default async function BlogIndexPage() {
                       </span>
                     )}
                   </Link>
-                  <div className="p-6 md:p-7 flex flex-col flex-1">
+                  <div className="p-5 sm:p-6 md:p-7 flex flex-col flex-1">
                     <div className="text-[10px] tracking-[0.08em] text-[#8A929C] font-bold mb-3">
                       <span className="text-forest">{card.category}</span> ·{" "}
                       {card.dateLabel}

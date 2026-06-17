@@ -118,7 +118,7 @@ export default function HeroSection({
   }, []);
 
   return (
-    <header className="relative h-[96vh] min-h-[600px] overflow-hidden">
+    <header className="relative h-[92vh] min-h-[480px] sm:min-h-[560px] md:min-h-[600px] overflow-hidden">
       <img
         src={layerA}
         alt={imageAlt}
@@ -137,26 +137,26 @@ export default function HeroSection({
       )}
       <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(8,16,30,0.72)_0%,rgba(8,16,30,0.42)_38%,rgba(8,16,30,0.05)_62%,transparent_100%)]" />
 
-      <div className="hero-rise absolute left-0 top-1/2 z-10 max-w-[640px] px-6 md:px-12">
-        <span className="font-script text-2xl text-white/90 block mb-1.5">
+      <div className="hero-rise absolute left-0 top-1/2 z-10 max-w-[640px] px-4 sm:px-6 md:px-12">
+        <span className="font-script text-xl sm:text-2xl text-white/90 block mb-1.5">
           {eyebrow}
         </span>
-        <h1 className="font-display font-medium text-white leading-[1.04] tracking-[-0.01em] mb-6 text-[clamp(40px,5.4vw,72px)]">
+        <h1 className="font-display font-medium text-white leading-[1.06] tracking-[-0.01em] mb-4 sm:mb-6 text-[clamp(30px,7vw,72px)]">
           {title}
         </h1>
-        <p className="text-white/80 font-light max-w-[430px] mb-8 text-[clamp(15px,1.4vw,17px)]">
+        <p className="text-white/85 font-light max-w-[430px] mb-6 sm:mb-8 text-[clamp(14px,1.4vw,17px)]">
           {description}
         </p>
-        <div className="flex flex-wrap gap-3.5">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3.5">
           <a
             href={primaryCta.href}
-            className="bg-forest hover:bg-[#33503F] text-white text-[13px] font-semibold tracking-[0.1em] px-[30px] py-[15px] transition-colors"
+            className="bg-forest hover:bg-[#33503F] text-white text-[12px] sm:text-[13px] font-semibold tracking-[0.1em] px-6 sm:px-[30px] py-3 sm:py-[15px] text-center transition-colors"
           >
             {primaryCta.label}
           </a>
           <a
             href={secondaryCta.href}
-            className="bg-transparent hover:bg-white/10 text-white text-[13px] font-semibold tracking-[0.1em] px-[30px] py-[15px] border border-white/60 transition-colors"
+            className="bg-transparent hover:bg-white/10 text-white text-[12px] sm:text-[13px] font-semibold tracking-[0.1em] px-6 sm:px-[30px] py-3 sm:py-[15px] border border-white/60 text-center transition-colors"
           >
             {secondaryCta.label}
           </a>

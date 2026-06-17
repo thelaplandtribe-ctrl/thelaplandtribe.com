@@ -46,8 +46,14 @@ body {
 
 .article-prose {
   color: var(--color-ink);
-  font-size: 17px;
-  line-height: 1.75;
+  font-size: 16px;
+  line-height: 1.72;
+}
+@media (min-width: 768px) {
+  .article-prose {
+    font-size: 17px;
+    line-height: 1.75;
+  }
 }
 .article-prose > * + * {
   margin-top: 1.25em;
@@ -55,19 +61,33 @@ body {
 .article-prose h2 {
   font-family: var(--font-playfair), serif;
   font-weight: 600;
-  font-size: 1.85em;
+  font-size: 1.45em;
   line-height: 1.2;
-  margin-top: 2em;
-  margin-bottom: 0.6em;
+  margin-top: 1.6em;
+  margin-bottom: 0.5em;
   color: var(--color-forest);
+}
+@media (min-width: 768px) {
+  .article-prose h2 {
+    font-size: 1.85em;
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+  }
 }
 .article-prose h3 {
   font-family: var(--font-playfair), serif;
   font-weight: 600;
-  font-size: 1.4em;
+  font-size: 1.2em;
   line-height: 1.25;
-  margin-top: 1.6em;
-  margin-bottom: 0.5em;
+  margin-top: 1.4em;
+  margin-bottom: 0.4em;
+}
+@media (min-width: 768px) {
+  .article-prose h3 {
+    font-size: 1.4em;
+    margin-top: 1.6em;
+    margin-bottom: 0.5em;
+  }
 }
 .article-prose h4 {
   font-weight: 700;

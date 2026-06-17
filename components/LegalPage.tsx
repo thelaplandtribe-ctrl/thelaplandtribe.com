@@ -16,18 +16,18 @@ export default function LegalPage({
 
   return (
     <>
-      <header className="bg-night text-white pt-36 pb-20">
-        <div className="mx-auto max-w-[1200px] px-6 md:px-12 text-center">
-          <span className="font-script text-gold text-2xl block mb-2">
+      <header className="bg-night text-white pt-24 sm:pt-28 md:pt-36 pb-12 sm:pb-16 md:pb-20">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12 text-center">
+          <span className="font-script text-gold text-xl sm:text-2xl block mb-2">
             {eyebrow}
           </span>
-          <h1 className="font-display text-4xl md:text-5xl font-medium leading-tight">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-medium leading-tight">
             {title}
           </h1>
         </div>
       </header>
-      <section className="bg-cream py-20">
-        <div className="mx-auto max-w-3xl px-6 md:px-8">
+      <section className="bg-cream py-12 sm:py-16 md:py-20">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 md:px-8">
           <div
             className="article-prose"
             dangerouslySetInnerHTML={{ __html: body }}

@@ -40,20 +40,20 @@ export default function PopularArticles({
   const visible = articles.slice(0, limit);
 
   return (
-    <section className="bg-cream py-[84px] text-center" id="exp">
-      <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-        <span className="font-script text-forest text-[22px] block mb-1">
+    <section className="bg-cream py-14 sm:py-20 md:py-[84px] text-center" id="exp">
+      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 md:px-12">
+        <span className="font-script text-forest text-[18px] sm:text-[22px] block mb-1">
           {eyebrow}
         </span>
-        <h2 className="font-display text-[34px] font-semibold mb-11">{title}</h2>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-[18px] text-left">
+        <h2 className="font-display text-[24px] sm:text-[28px] md:text-[34px] font-semibold mb-8 sm:mb-11">{title}</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 md:gap-[18px] text-left">
           {visible.map((article) => (
             <a
               key={article.slug}
               href={`/blogs/infos/${article.slug}`}
               className="group transition-transform duration-300 hover:-translate-y-1"
             >
-              <div className="h-[150px] rounded-[4px] overflow-hidden relative mb-3.5 shadow-[0_10px_26px_rgba(27,36,48,0.10)]">
+              <div className="h-[180px] sm:h-[160px] md:h-[150px] rounded-[4px] overflow-hidden relative mb-3.5 shadow-[0_10px_26px_rgba(27,36,48,0.10)]">
                 <Cover article={article} />
               </div>
               <h4 className="font-display text-base font-medium leading-[1.25] mb-3">
@@ -68,7 +68,7 @@ export default function PopularArticles({
         </div>
         <a
           href={allHref}
-          className="mt-[42px] inline-block text-[12px] font-bold tracking-[0.1em] text-ink border border-ink/10 px-[34px] py-3.5 hover:bg-ink hover:text-white hover:border-ink transition-colors"
+          className="mt-8 sm:mt-[42px] inline-block text-[12px] font-bold tracking-[0.1em] text-ink border border-ink/10 px-[28px] sm:px-[34px] py-3 sm:py-3.5 hover:bg-ink hover:text-white hover:border-ink transition-colors"
         >
           {allLabel}
         </a>

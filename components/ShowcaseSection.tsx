@@ -133,7 +133,7 @@ function Half({
   const textShadowStyle = darkText ? undefined : { textShadow: TEXT_SHADOW };
   return (
     <div
-      className={`relative overflow-hidden min-h-[600px] flex items-center py-20 px-8 md:px-14 ${
+      className={`relative overflow-hidden min-h-[420px] sm:min-h-[500px] md:min-h-[600px] flex items-center py-12 sm:py-16 md:py-20 px-5 sm:px-8 md:px-14 ${
         dark ? "bg-[#0A1422]" : "bg-night"
       }`}
     >
@@ -153,7 +153,7 @@ function Half({
           {data.eyebrow}
         </span>
         <h2
-          className={`font-display text-[32px] leading-[1.12] font-medium mb-[18px] ${
+          className={`font-display text-[24px] sm:text-[28px] md:text-[32px] leading-[1.14] font-medium mb-[18px] ${
             darkText ? "text-[#1B2430]" : "text-white"
           }`}
           style={textShadowStyle}
