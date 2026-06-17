@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { formatPriceCents, useCart } from "@/context/CartContext";
 
 export default function CartDrawer() {
@@ -13,6 +14,39 @@ export default function CartDrawer() {
     totalCount,
     totalCents,
   } = useCart();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleCheckout = async () => {
+    setError(null);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((it) => ({
+            id: it.id,
+            titre: it.titre,
+            priceCents: it.priceCents,
+            quantite: it.quantite,
+            image: it.image,
+            type: it.type,
+            variantLabel: it.variantLabel,
+          })),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data?.url) {
+        throw new Error(data?.error || "Échec de la création de la commande.");
+      }
+      window.location.href = data.url;
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Une erreur est survenue.";
+      setError(msg);
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -168,21 +202,39 @@ export default function CartDrawer() {
             <p className="text-[11px] text-[#8A929C] mb-4">
               Frais de livraison calculés à l'étape suivante.
             </p>
+            {error && (
+              <div
+                role="alert"
+                className="mb-3 px-3 py-2.5 bg-[#FBECEA] border border-[#C9352B]/30 text-[#A02517] text-xs"
+              >
+                {error}
+              </div>
+            )}
             <button
               type="button"
-              disabled
-              className="w-full bg-forest/50 text-white text-[13px] font-semibold tracking-[0.1em] py-4 cursor-not-allowed inline-flex items-center justify-center gap-2"
+              onClick={handleCheckout}
+              disabled={loading || items.length === 0}
+              className="w-full bg-forest hover:bg-[#33503F] disabled:bg-forest/60 disabled:cursor-not-allowed text-white text-[13px] font-semibold tracking-[0.1em] py-4 transition-colors inline-flex items-center justify-center gap-2"
             >
-              <i className="ti ti-lock" aria-hidden="true" />
-              PAIEMENT BIENTÔT DISPONIBLE
+              {loading ? (
+                <>
+                  <span
+                    className="inline-block w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"
+                    aria-hidden="true"
+                  />
+                  REDIRECTION VERS STRIPE…
+                </>
+              ) : (
+                <>
+                  <i className="ti ti-lock" aria-hidden="true" />
+                  PASSER COMMANDE
+                </>
+              )}
             </button>
-            <Link
-              href="/pages/contact"
-              onClick={closeCart}
-              className="mt-3 block text-center text-[12px] font-bold tracking-[0.08em] text-forest hover:underline"
-            >
-              Nous contacter pour commander
-            </Link>
+            <p className="mt-3 text-center text-[11px] text-[#8A929C]">
+              Paiement sécurisé par{" "}
+              <span className="font-semibold text-ink/70">Stripe</span>
+            </p>
           </footer>
         )}
       </aside>
