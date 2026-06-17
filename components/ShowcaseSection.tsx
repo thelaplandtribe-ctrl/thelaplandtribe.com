@@ -133,7 +133,7 @@ function Half({
   const textShadowStyle = darkText ? undefined : { textShadow: TEXT_SHADOW };
   return (
     <div
-      className={`relative overflow-hidden min-h-[420px] sm:min-h-[500px] md:min-h-[600px] flex items-center py-12 sm:py-16 md:py-20 px-5 sm:px-8 md:px-14 ${
+      className={`relative overflow-hidden min-h-[420px] md:min-h-[500px] lg:min-h-[600px] flex items-end md:items-center p-7 md:p-12 lg:px-14 ${
         dark ? "bg-[#0A1422]" : "bg-night"
       }`}
     >
@@ -142,18 +142,18 @@ function Half({
           src={data.bgImage}
           alt={data.bgImageAlt || ""}
           aria-hidden={data.bgImageAlt ? undefined : true}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
       )}
-      <div className="relative z-10 max-w-[380px]">
+      <div className="relative z-10 max-w-[280px] md:max-w-[380px]">
         <span
-          className="font-script text-gold text-xl block mb-2"
+          className="font-script text-gold text-lg md:text-xl block mb-1.5 md:mb-2"
           style={textShadowStyle}
         >
           {data.eyebrow}
         </span>
         <h2
-          className={`font-display text-[24px] sm:text-[28px] md:text-[32px] leading-[1.14] font-medium mb-[18px] ${
+          className={`font-display text-[22px] md:text-[28px] lg:text-[32px] leading-[1.14] font-medium mb-3 md:mb-[18px] ${
             darkText ? "text-[#1B2430]" : "text-white"
           }`}
           style={textShadowStyle}
@@ -161,7 +161,7 @@ function Half({
           {data.title}
         </h2>
         <p
-          className={`text-sm font-light mb-6 ${
+          className={`text-[13px] md:text-sm font-light mb-5 md:mb-6 ${
             darkText ? "text-[#1B2430]/85" : "text-white/90"
           }`}
           style={textShadowStyle}
@@ -169,7 +169,7 @@ function Half({
           {data.description}
         </p>
         {data.features && data.features.length > 0 && (
-          <div className="flex flex-wrap gap-[22px] mb-[26px]">
+          <div className="hidden md:flex flex-wrap gap-[22px] mb-[26px]">
             {data.features.map((f) => (
               <div
                 key={f.label}
@@ -190,7 +190,7 @@ function Half({
         )}
         <a
           href={data.ctaHref}
-          className={`inline-block text-[13px] font-semibold tracking-[0.1em] px-[30px] py-[15px] transition-colors ${
+          className={`inline-block text-[12px] md:text-[13px] font-semibold tracking-[0.1em] px-6 md:px-[30px] py-3 md:py-[15px] transition-colors ${
             darkText
               ? "bg-[#1B2430] hover:bg-black text-white"
               : "bg-white/95 hover:bg-white text-night"
@@ -200,7 +200,7 @@ function Half({
         </a>
       </div>
       {!data.bgImage && (
-        <div className="hidden md:block absolute -right-[30px] top-1/2 -translate-y-1/2 w-[300px] z-0 opacity-95">
+        <div className="absolute right-4 bottom-0 md:right-[-30px] md:top-1/2 md:bottom-auto md:-translate-y-1/2 max-w-[180px] md:max-w-[300px] z-0 opacity-95 pointer-events-none">
           {data.illustration}
         </div>
       )}
