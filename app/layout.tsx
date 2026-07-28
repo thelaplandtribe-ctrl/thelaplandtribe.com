@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Mulish, Petit_Formal_Script } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
@@ -84,6 +85,7 @@ export default function RootLayout({
           <Footer />
           <CartDrawer />
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
