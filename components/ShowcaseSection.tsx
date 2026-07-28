@@ -65,12 +65,12 @@ const defaultLeft: ShowcaseHalf = {
 };
 
 const defaultRight: ShowcaseHalf = {
-  eyebrow: "Expériences",
-  title: "Vous rêvez de changer de décor ?",
+  eyebrow: "E-books",
+  title: "Guides pratiques pour s'installer dans le Nord",
   description:
-    "Vivre l'Arctique demande plus qu'un rêve : il faut les bons spots, le bon timing et un peu d'aide locale. Nos séjours et guides vous accompagnent avec une vision concrète et réaliste.",
-  ctaLabel: "DÉCOUVRIR LES SÉJOURS",
-  ctaHref: "/pages/contact",
+    "Des guides complets pour réussir votre expatriation en Finlande ou en Suède — logement, budget, démarches, vie quotidienne.",
+  ctaLabel: "DÉCOUVRIR LES E-BOOKS",
+  ctaHref: "/collections/e-books",
   bgImage: "/images/bg-ebooks.png",
   bgImageAlt: "E-books d'expatriation The Lapland Tribe",
   illustration: (

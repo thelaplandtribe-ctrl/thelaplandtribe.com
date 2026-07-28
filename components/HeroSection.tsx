@@ -45,6 +45,32 @@ function getHelsinkiSeason(now: Date): Season {
   return "hiver";
 }
 
+function getHelsinkiHour(now: Date): number {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Europe/Helsinki",
+    hour: "numeric",
+    hour12: false,
+  }).formatToParts(now);
+  return Number(parts.find((p) => p.type === "hour")?.value) || 0;
+}
+
+// Fenêtres lever/coucher approximatives en Laponie par saison, pour choisir
+// une image plausible sans attendre l'API sunrise (qui viendra ensuite
+// raffiner et déclencher le coucher spécifique).
+const APPROX_DAY: Record<Season, { rise: number; set: number }> = {
+  ete: { rise: 4, set: 22 },
+  automne: { rise: 7, set: 18 },
+  hiver: { rise: 10, set: 14 },
+};
+
+function getDefaultHeroImage(now: Date): string {
+  const season = getHelsinkiSeason(now);
+  const hour = getHelsinkiHour(now);
+  const { rise, set } = APPROX_DAY[season];
+  if (hour < rise || hour >= set) return NIGHT_IMAGE;
+  return SEASON_IMAGES[season].lever;
+}
+
 function pickHeroImage(
   season: Season,
   now: Date,
@@ -94,7 +120,7 @@ export default function HeroSection({
   secondaryCta = { label: "DÉCOUVRIR LA BOUTIQUE", href: "/collections/affiches-murales" },
   imageAlt = "Paysage de Laponie",
 }: HeroSectionProps) {
-  const [layerA, setLayerA] = useState<string>(NIGHT_IMAGE);
+  const [layerA, setLayerA] = useState<string>(() => getDefaultHeroImage(new Date()));
   const [layerB, setLayerB] = useState<string | null>(null);
   const [showB, setShowB] = useState(false);
 
