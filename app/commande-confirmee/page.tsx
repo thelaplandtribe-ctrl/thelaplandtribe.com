@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-type SearchParams = { mock?: string };
-
 export const metadata: Metadata = {
   title: "Commande confirmée",
   description:
@@ -10,16 +8,14 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function CommandeConfirmeePage({
-  searchParams,
-}: {
-  searchParams: SearchParams;
-}) {
-  const isMock = searchParams.mock === "1";
+export default function CommandeConfirmeePage() {
+  const isTestMode =
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY?.startsWith("pk_test_") ??
+    false;
   return (
     <section className="bg-cream min-h-[80vh] flex items-center py-16 sm:py-20 md:py-28">
       <div className="mx-auto max-w-[640px] px-4 sm:px-6 md:px-12 text-center">
-        {isMock && (
+        {isTestMode && (
           <div className="mb-8 inline-block px-4 py-2 bg-gold/15 border border-gold/40 text-ink/80 text-[11px] tracking-[0.12em] font-bold uppercase">
             Mode test — aucun paiement réel n'a été effectué
           </div>
