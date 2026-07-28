@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+type SearchParams = { mock?: string };
+
 export const metadata: Metadata = {
   title: "Commande confirmée",
   description:
@@ -8,10 +10,20 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function CommandeConfirmeePage() {
+export default function CommandeConfirmeePage({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
+  const isMock = searchParams.mock === "1";
   return (
     <section className="bg-cream min-h-[80vh] flex items-center py-16 sm:py-20 md:py-28">
       <div className="mx-auto max-w-[640px] px-4 sm:px-6 md:px-12 text-center">
+        {isMock && (
+          <div className="mb-8 inline-block px-4 py-2 bg-gold/15 border border-gold/40 text-ink/80 text-[11px] tracking-[0.12em] font-bold uppercase">
+            Mode test — aucun paiement réel n'a été effectué
+          </div>
+        )}
         <div className="mx-auto w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-forest text-white flex items-center justify-center mb-8 shadow-[0_18px_40px_rgba(60,90,75,0.30)]">
           <i className="ti ti-check text-4xl sm:text-5xl" aria-hidden="true" />
         </div>

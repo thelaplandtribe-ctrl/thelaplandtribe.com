@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://thelaplandtribe.com/sitemap.xml
+
+User-agent: meta-externalagent
+Crawl-delay: 10

@@ -4,6 +4,10 @@ import { hasStripeKey, stripe } from "@/lib/stripe";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+function useMockCheckout(): boolean {
+  return process.env.STRIPE_MOCK === "1" || !hasStripeKey();
+}
+
 type IncomingItem = {
   id: string;
   titre: string;
@@ -37,13 +41,6 @@ function absoluteImage(image: string | null | undefined, origin: string): string
 }
 
 export async function POST(request: Request) {
-  if (!hasStripeKey()) {
-    return NextResponse.json(
-      { error: "Stripe non configuré : STRIPE_SECRET_KEY manquante." },
-      { status: 503 },
-    );
-  }
-
   let body: { items?: unknown };
   try {
     body = await request.json();
@@ -63,6 +60,27 @@ export async function POST(request: Request) {
   }
 
   const origin = request.headers.get("origin") || "https://thelaplandtribe.com";
+
+  // Mock mode : pas d'appel Stripe, redirection directe vers la page de confirmation.
+  // Actif si STRIPE_MOCK=1 ou si STRIPE_SECRET_KEY est absente.
+  if (useMockCheckout()) {
+    const mockId = `mock_${Date.now().toString(36)}_${Math.random()
+      .toString(36)
+      .slice(2, 8)}`;
+    const totalCents = items.reduce(
+      (n, i) => n + i.priceCents * i.quantite,
+      0,
+    );
+    console.log("[checkout] MOCK mode — bypassing Stripe", {
+      session_id: mockId,
+      item_count: items.length,
+      amount_total: totalCents,
+    });
+    return NextResponse.json({
+      url: `${origin}/commande-confirmee?session_id=${mockId}&mock=1`,
+      mock: true,
+    });
+  }
 
   try {
     const session = await stripe.checkout.sessions.create({
